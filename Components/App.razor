@@ -12,9 +12,184 @@
     <ImportMap />
     <link rel="icon" type="image/png" href="favicon.png" />
     <HeadOutlet />
+
+    <style>
+            /* *Colores */
+            /*
+                Fondo general: #F8F4EE
+                Fondo de elementos primario: #1E1810
+                Café bajito sand: #C8B89A
+                Café discreto: #5A4A38
+                Negro semitransparente: rgba(255,255,255,0.07)
+                Naranja: #e26d5c
+            */
+
+            .header {
+                font-family: 'Brush Script MT', Garamond, serif;
+                color: #1E1810;
+            }
+
+            .grisFondo {
+                background: #F8F4EE;
+            }
+
+            .cafePrincipal {
+                background: #1E1810;
+                color: white;
+            }
+
+            .txtColorCafeDiscreto {
+                color: #5A4A38;
+            }
+
+            .borderCafeDiscreto {
+                border-bottom: solid 1px #C8B89A !important;
+            }
+
+            /* *Estilos para NAV */
+            /* Color para la página actual*/
+            .elementoActual {
+                background-color: rgba(255, 255, 255, 0.07);
+            }
+
+            /* Color al pasar el puntero por los elementos del menú*/
+            nav li:hover a {
+                color: #e26d5c !important;
+            }
+
+            /* * Tabla de libros */
+
+            .seccionBordes {
+                margin: 1% 2%;
+                /* padding: 2%; */
+                border-radius: 25px;
+            }
+
+            /* Titulo de sección */
+            .tituloTabla {
+                padding: 1% 2%;
+                display: flex;
+                justify-content: space-between;
+                font-size: medium;
+                color: #5A4A38;
+            }
+
+            span a {
+                color: #e26d5c;
+                text-decoration: none;
+            }
+
+            /* Contenido en sí */
+            .estadoLibro {
+                background-color: #ffc38b89;
+                padding: 5px;
+                border-radius: 10px;
+            }
+
+                .estadoLibro span {
+                    color: #e2af5c;
+                }
+
+            .iconoBoton {
+                height: 16px;
+            }
+
+            .iconoProgreso {
+                width: 15px;
+            }
+
+            /* para las barras de progreso */
+            progress {
+                width: 100%;
+                height: 10px;
+                appearance: none;
+                margin-bottom: 15px;
+            }
+
+                /* fondo de la barra */
+                progress::-webkit-progress-bar {
+                    background-color: #ddd;
+                    border-radius: 10px;
+                }
+
+                /* barra de progreso  */
+                progress::-webkit-progress-value {
+                    border-radius: 10px;
+                }
+
+            .barraTerminados::-webkit-progress-value {
+                background-color: green;
+            }
+
+            .barraProceso::-webkit-progress-value {
+                background-color: coral;
+            }
+
+            .barraSinEmpezar::-webkit-progress-value {
+                background-color: crimson;
+            }
+
+            .bordesTablaProgreso {
+                width: 300px;
+                padding: 20px;
+                margin: 20px;
+                border-radius: 25px;
+                border: 1px solid #723d46;
+            }
+
+            .tituloTabla {
+                margin-bottom: 20px;
+            }
+
+            .filaProgreso {
+                display: flex;
+                align-items: center;
+            }
+
+            .datosProgreso {
+                margin-left: auto;
+                display: flex;
+                gap: 10px;
+            }
+
+            .bordesTarjetasEstado {
+                border: 1px solid #723d46;
+                padding: 8px 20px;
+                margin: 15px;
+                border-radius: 25px;
+            }
+
+            .iconoTarjeta {
+                width: 50px;
+            }
+
+            .tarjetaEstado {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .numeroTarjeta {
+                font-size: 20px;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            .textoTarjeta {
+                margin: 0;
+                color: #7a6f66;
+            }
+
+
+            /* ----------------------------------- CATALOGO ----------------------------------- */
+            /* flex del display para que ocupe más espacio que la barra */
+            .tituloEspacioFlex3 {
+                flex: 3
+            }
+    </style>
 </head>
 
-<body>
+<body >
     <Routes />
     <ReconnectModal />
     <script src="@Assets["_framework/blazor.web.js"]"></script>
