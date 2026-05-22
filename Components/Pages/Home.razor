@@ -7,6 +7,121 @@
         <header class="text-bg-light mb-5 py-3 border-bottom border-2 borderCafeDiscreto text-center">
             <h2 class="header display-3">Hola, bienvenido</h2>
         </header>
+
+        <!--- *Tarjetas de estado [Total, progreso, terminados, sin empezar] -->
+        <section class="d-flex flex-wrap px-2">
+            <!--Tarjeta: Total de libros-->
+            <div class="text-bg-light bordesTarjetasEstado tarjetaEstado flex-grow-1">
+                <img class="iconoTarjeta" src="https://cdn-icons-png.flaticon.com/128/5832/5832416.png">
+                <div>
+                    <p class="numeroTarjeta">12</p>
+                    <p class="textoTarjeta">Total de libros</p>
+                </div>
+            </div>
+            <!--Tarjeta: Terminados -->
+            <div class="text-bg-light bordesTarjetasEstado tarjetaEstado flex-grow-1">
+                <img class="iconoTarjeta" src="https://cdn-icons-png.flaticon.com/512/16799/16799608.png">
+                <div>
+                    <p class="numeroTarjeta">20</p>
+                    <p class="textoTarjeta">Terminados</p>
+                </div>
+            </div>
+            <!--Tarjeta: En proceso-->
+            <div class="text-bg-light bordesTarjetasEstado tarjetaEstado flex-grow-1">
+                <img class="iconoTarjeta" src="https://images.emojiterra.com/google/android-12l/512px/1f4d6.png">
+                <div>
+                    <p class="numeroTarjeta">7</p>
+                    <p class="textoTarjeta">En proceso</p>
+                </div>
+            </div>
+            <!--Tarjeta: Sin empezar -->
+            <div class="text-bg-light bordesTarjetasEstado tarjetaEstado flex-grow-1">
+                <img class="iconoTarjeta"
+                     src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/1024px/1f4ed.png">
+                <div>
+                    <p class="numeroTarjeta">3</p>
+                    <p class="textoTarjeta">Sin empezar</p>
+                </div>
+            </div>
+        </section>
+        <!--- FIN Tarjetas de estado [Total, progreso, terminados, sin empezar] -->
+        <!--Libros recientes-->
+        <section class="d-flex">
+            <section class="text-bg-light seccionBordes flex-grow-1 table-responsive">
+                <h3 class="tituloTabla"> <span>Libros recientes</span> <span><a href="#">Ver todos →</a></span></h3>
+                <table class="table table-borderless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>LIBRO</th>
+                            <th>AUTOR</th>
+                            <th>ESTADO</th>
+                            <th>ACCIONES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>Portada</span> Libro ejemplo</td>
+                            <td> Autor ejemplo</td>
+                            <td> <span class="estadoLibro"> <span>&#9679;</span> Estado ejemplo</span></td>
+                            <td>
+                                <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                    </svg>
+                                </button><button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <!--FIN Libros recientes-->
+        <!--Estadisticas de libros-->
+        <section class="text-bg-light bordesTablaProgreso">
+            <h3 class="tituloTabla"> <span>Progreso por estado</span></h3>
+
+            <div class="filaProgreso">
+                <img class="iconoProgreso" src="https://cdn-icons-png.flaticon.com/512/16799/16799608.png">
+                <label>Terminados:</label>
+                <div class="datosProgreso">
+                    <span>20 libros</span>
+                    <span>•</span>
+                    <span>70%</span>
+                </div>
+            </div>
+            <progress class="barraTerminados" max="100" value="70"></progress>
+
+            <div class="filaProgreso">
+                <img class="iconoProgreso" src="https://images.emojiterra.com/google/android-12l/512px/1f4d6.png">
+                <label>En proceso:</label>
+                <div class="datosProgreso">
+                    <span>7 libros</span>
+                    <span>•</span>
+                    <span>40%</span>
+                </div>
+            </div>
+            <progress class="barraProceso" max="100" value="40"></progress>
+
+            <div class="filaProgreso">
+                <img class="iconoProgreso"
+                     src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/1024px/1f4ed.png">
+                <label>Sin empezar:</label>
+                <div class="datosProgreso">
+                    <span>3 libros</span>
+                    <span>•</span>
+                    <span>20%</span>
+                </div>
+            </div>
+            <progress class="barraSinEmpezar" max="100" value="20"></progress>
+        </section>
+        <!--FIN Estadisticas de libros-->
+    </section>
+    <!--FIN Estadisticas de libros-->
     </main>
 </div>
 @code {
