@@ -1,4 +1,5 @@
 ﻿@page "/catalogo"
+@using Bookmory.Components.Shared
 
 <div class="container p-0 m-0">
     <!--- *Parte principal -->
@@ -19,55 +20,53 @@
         </header>
 
         <!--*Sección de filtros-->
-        <aside class="bg-light px-2">
-            <section>
+        <aside class="bg-light p-3 mb-1">
+            <section  class="px-2 py-1 d-flex flex-row gap-3 align-items-left">
                 <h4>Género</h4>
-                <ul class="list-unstyled">
-                    <li><button>Todos <span>48</span></button></li>
-                    <li><button>Ficción <span>18</span></button></li>
-                    <li><button>Historia <span>9</span></button></li>
-                    <li><button>Ciencia <span>7</span></button></li>
-                    <li><button>Terror <span>6</span></button></li>
-                    <li><button>Poesía <span>5</span></button></li>
-                </ul>
+                <select class="form-select w-25" @bind="_generoSeleccionado" aria-label="Seleccionar género">
+                    <option value="">Todos</option>
+                    <option value="Ficción">Ficción</option>
+                    <option value="Historia">Historia</option>
+                    <option value="Ciencia">Ciencia</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Poesía">Poesía</option>
+                </select>
             </section>
         </aside>
         <!--* FIN Sección de filtros-->
         <!--*Sección de catálgo de libros-->
-        <section class="d-flex flex-wrap gap-4 px-2">
+        <section class="d-flex flex-wrap gap-4 px-2 justify-content-between">
             <!-- TODO: Acomodar tamaño de imagen para que todas las tarjetas tengan el mismo tamaño de imagen, creo que ocupan el mismo alto sin importar el tamaño ed la imagen, creo que eso no se debe corregir, eliminar ejemplos-->
             <!--Documentación de tarjetas https://getbootstrap.com/docs/5.3/components/card/-->
-            <div class="card p-2" style="width: 18rem;">
-                <img src="https://i.imgur.com/o0pIfOd.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                    <a href="#" class="btn btn-primary">Agregar</a>
-                </div>
-            </div>
+            <BookCard 
+                Title="Cien años de soledad" 
+                Author="Gabriel García Márquez"
+                Description="Novela que narra la historia de siete generaciones de la familia Buendía en el pueblo ficticio de Macondo" 
+                ImageUrl="https://i.imgur.com/o0pIfOd.jpeg">
+            </BookCard>
 
-            <div class="card p-2" style="width: 18rem;">
-                <img src="https://i.imgur.com/ZmODEpL.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                    <a href="#" class="btn btn-primary">Agregar</a>
-                </div>
-            </div>
+            <BookCard Title="Cien años de soledad"
+                      Author="Gabriel García Márquez"
+                      Description="Novela que narra la historia de siete generaciones de la familia Buendía en el pueblo ficticio de Macondo"
+                      ImageUrl="https://i.imgur.com/o0pIfOd.jpeg">
+            </BookCard>
 
-            <div class="card p-2" style="width: 18rem;">
-                <img src="https://i.imgur.com/pt9rGiS.jpeg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                    <a href="#" class="btn btn-primary">Agregar</a>
-                </div>
-            </div>
+            <BookCard Title="Pedro Páramo"
+                      Author="Juan Rulfo"
+                      Description="Obra maestra de la literatura hispanoamericana escrita por Juan Rulfo y publicada en 1955"
+                      ImageUrl="https://i.imgur.com/ZmODEpL.jpeg">
+            </BookCard>
+
+            <BookCard Title="Memorias del subsuelo"
+                      Author="Fiódor Dostoyevski"
+                      Description="Narra el monólogo de un amargado exfuncionario de 40 años que vive aislado en una especie de subsuelo mental y físico."
+                      ImageUrl="https://i.imgur.com/pt9rGiS.jpegg">
+            </BookCard>
         </section>
         <!--*Sección de catálgo de libros-->
     </main>
 </div>
 
 @code {
-
+    private string _generoSeleccionado = string.Empty;
 }

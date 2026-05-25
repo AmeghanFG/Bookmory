@@ -1,0 +1,28 @@
+﻿@page "/bookcard"
+@rendermode InteractiveServer
+
+<div class="card p-2" style="width: 18rem;">
+    <img src="@ImageUrl" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Title</h5>
+        <p class="card-text">@Author</p>
+        <p class="card-text">@Description</p>
+        <a href="#" class="btn btn-primary">Agregar</a>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Author { get; set; }
+
+    [Parameter]
+    public string Description { get; set; }
+
+    [Parameter]
+    public string ImageUrl { get; set; }
+
+
+}
