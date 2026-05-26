@@ -4,9 +4,113 @@
 <div class="container-fluid p-0 m-0">
     <!--- Parte principal -->
     <main class="w-100 vh-100 overflow-auto m-0  p-0">
-        <header class="text-bg-light mb-5 py-3 border-bottom border-2 borderCafeDiscreto text-center">
+        <header class="text-bg-light mb-3 py-3 border-bottom border-2 borderCafeDiscreto text-center">
             <h2 class="header display-3 tituloEspacioFlex3">Detalles</h2>
         </header>
+
+        <!--Sección de detalles de libro-->
+        <section class="d-flex flex-wrap gap-4 p-4">
+            <!-- Botón volver -->
+            <button class="btn d-flex align-items-center gap-2 mb-3 small text-secondary">
+                ← Volver a catálogo
+            </button>
+
+            <!-- Contenedor de los detalles del libro -->
+            <div class="d-flex flex-wrap gap-5 px-4 pb-4 align-items-start">
+
+                <!-- ── Columna izquierda: portada y agregar ── -->
+                <div class="flex-shrink-0 left-col-info">
+
+                    <!-- Portada con imagen -->
+                    <img src="https://i.imgur.com/o0pIfOd.jpeg"
+                         alt="Portada del libro"
+                         class="object-fit-cover rounded-4 shadow-lg d-block mb-3 w-100 h-book-detail">
+
+                    <!-- Accion agregar -->
+                    <p class="mb-1 fs-6 text-secondary">¿Estas leyendo o quieres leer este libro?</p>
+
+                    <button class="btn btn-sm btn-primary w-100 mt-1 fs-6 rounded-3">
+                        Añadir a mis libros
+                    </button>
+                </div>
+
+                <!-- Columna derecha: información -->
+                <div class="right-col-info">
+
+                    <!-- Chip de género -->
+                    <span class="d-inline-block mb-3 px-3 py-1 badge rounded-pill text-bg-secondary fs-6">
+                        Genero principal: Realismo mágico
+                    </span>
+
+                    <!-- Título -->
+                    <h1 class="display-5 lh-sm text-dark mb-1">
+                        Cien Años de Soledad
+                    </h1>
+
+                    <!-- Autor -->
+                    <p class="fs-6 text-secondary mb-3">
+                        por <strong class="text-dark">Gabriel García Márquez</strong>
+                    </p>
+
+                    <!-- Separador decorativo -->
+                    <div class="book-divider rounded-pill mb-4"></div>
+
+                    <!-- Metadatos en grid 2 columnas -->
+                    <div class="row row-cols-2 g-3 mb-4">
+                        <div class="col">
+                            <p class="mb-0 small text-uppercase fw-bold text-secondary">
+                                Año de publicación
+                            </p>
+                            <p class="mb-0 fw-semibold text-dark fs-5">
+                                1967
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="mb-0 small text-uppercase fw-bold text-secondary">
+                                Editorial
+                            </p>
+                            <p class="mb-0 fw-semibold text-dark fs-5">
+                                Editorial Sudamericana
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="mb-0 small text-uppercase fw-bold text-secondary">
+                                Páginas
+                            </p>
+                            <p class="mb-0 fw-semibold text-dark fs-5">
+                                471 páginas
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="mb-0 small text-uppercase fw-bold text-secondary">
+                                ISBN
+                            </p>
+                            <p class="mb-0 fw-semibold text-dark fs-5">
+                                978-0-06-088328-7
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Separador decorativo -->
+                    <div class="book-divider rounded-pill mb-4"></div>
+
+                    <!-- Sinopsis -->
+                    <p class="mb-2 fs-5 text-uppercase fw-bold text-secondary">
+                        Sinopsis
+                    </p>
+
+                    <p class="mb-0 text-body lh-lg">
+                        La novela narra la historia de siete generaciones de la familia Buendía en el pueblo
+                        ficticio de Macondo, desde su fundación hasta su desaparición. A través de un relato
+                        cargado de magia, mitos y realidades entrelazadas, García Márquez explora temas
+                        universales como la soledad, el amor, la guerra, el poder y el paso inexorable del
+                        tiempo. Considerada una de las obras más importantes de la literatura universal y
+                        pieza fundamental del boom latinoamericano.
+                    </p>
+
+                </div>
+            </div>
+        </section>
     </main>
 </div>
 
