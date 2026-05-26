@@ -1,10 +1,11 @@
 ﻿@page "/catalogo"
+@rendermode InteractiveServer
 @using Bookmory.Components.Shared
 
 <div class="container-fluid p-0 m-0">
-    <!--- *Parte principal -->
+    <!--- Parte principal -->
     <main class="w-100 vh-100 overflow-auto m-0 p-0">
-        <!--*Encabezado-->
+        <!--Encabezado-->
         <header class="d-flex flex-row flex-wrap align-items-center text-bg-light mb-5 py-3 px-4 border-bottom border-2 borderCafeDiscreto">
             <h2 class="header display-3 tituloEspacioFlex3">Catálogo de libros</h2>
 
@@ -19,7 +20,7 @@
             </form>
         </header>
 
-        <!--*Sección de filtros-->
+        <!--Sección de filtros-->
         <aside class="bg-light p-3 mb-1">
             <section  class="px-2 py-1 d-flex flex-row gap-3 align-items-left">
                 <h4>Género</h4>
@@ -33,8 +34,8 @@
                 </select>
             </section>
         </aside>
-        <!--* FIN Sección de filtros-->
-        <!--*Sección de catálgo de libros-->
+        <!-- FIN Sección de filtros-->
+        <!--Sección de catálgo de libros-->
         <section class="d-flex flex-wrap gap-4 px-2 justify-content-between">
             <!-- TODO: Acomodar tamaño de imagen para que todas las tarjetas tengan el mismo tamaño de imagen, creo que ocupan el mismo alto sin importar el tamaño ed la imagen, creo que eso no se debe corregir, eliminar ejemplos-->
             <!--Documentación de tarjetas https://getbootstrap.com/docs/5.3/components/card/-->
@@ -69,7 +70,7 @@
                       ImageUrl="https://i.imgur.com/pt9rGiS.jpegg">
             </BookCard>
         </section>
-        <!--*Sección de catálgo de libros-->
+        <!--Sección de catálgo de libros-->
     </main>
 </div>
 

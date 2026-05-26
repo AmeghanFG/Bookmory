@@ -22,7 +22,11 @@
     </div>
 
     <div class="d-flex gap-2 px-3 pb-3">
-        <button class="btn btn-sm btn-outline-secondary flex-grow-1">✏️ Editar</button>
+        <select class="form-select" @bind="_estado" aria-label="Seleccionar estado">
+            <option value="no-empezado">No empezado</option>
+            <option value="en-proceso">En proceso</option>
+            <option value="terminado">Terminado</option>
+        </select>
         <button class="btn btn-sm btn-outline-danger">🗑️</button>
     </div>
 </div>
@@ -42,6 +46,8 @@
 
     string statusStyle = "";
 
+    string _estado;
+
     // método -> el componente que se ejecuta automáticamente cuando el componente recibe parámetros de su componente padre y se asignan sus valores, es parecido a lo que se hacía en Razor
     protected override void OnParametersSet()
     {
@@ -53,6 +59,6 @@
         if (Status == "En proceso") statusStyle = "en-proceso";
         if (Status == "No empezado") statusStyle = "no-empezado";
         if (Status == "Terminado") statusStyle = "terminado";
-        if (string.IsNullOrEmpty(Status)) statusStyle = "en-proceso";
+        if (string.IsNullOrEmpty(Status)) statusStyle = "no-empezado";
     }
 }
