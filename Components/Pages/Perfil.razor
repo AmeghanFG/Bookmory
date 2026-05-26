@@ -1,8 +1,51 @@
 ﻿@page "/perfil"
 @rendermode InteractiveServer
 
-<h3>Perfil</h3>
+<div class="container-fluid p-0 m-0">
+    <!--- Parte principal de mis libros -->
+    <main class="w-100 vh-100 overflow-auto m-0 p-0 grisFondo">
+        <!--Encabezado-->
+        <header class="d-flex flex-row flex-wrap align-items-center text-bg-light mb-5 py-3 px-4 border-bottom border-2 borderCafeDiscreto">
+            <h2 class="header display-3 tituloEspacioFlex3">Perfil</h2>
+        </header>
 
+        <!--Sección de perfil-->
+        <section class="d-flex flex-wrap gap-4 px-2 mx-5">
+            <div class="card border-0 shadow-sm rounded-4 p-4 w-100">
+    
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                    <!-- parte en la izquierda -->
+                    <div class="d-flex align-items-center gap-3">
+
+                        <!-- Avatar -->
+                        <div class="d-flex align-items-center justify-content-center text-white fw-bold fs-1">
+                            <img src="https://i.imgur.com/d4KpfZU.png" alt="Avatar" class="rounded-circle object-fit-cover overflow-auto" width="80" height="80">
+                        </div>
+
+                        <!-- Información -->
+                        <div>
+                            <h2 class="mb-1 fw-normal">
+                                Sofía Ramírez
+                            </h2>
+
+                            <p class="mb-1 text-dark small">
+                                sofiaramirez@correo.com
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- boton (en la derecha) -->
+                    <button class="btn btn-dark px-4 py-2 rounded-3 fw-semibold">
+                        Editar perfil
+                    </button>
+
+                </div>
+            </div>
+
+        </section>
+    </main>
+</div>
 @code {
 
 }
