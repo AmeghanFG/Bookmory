@@ -1,6 +1,32 @@
 ﻿@page "/mis_libros"
+@using Bookmory.Components.Shared
 
-<h3>Mis_libros</h3>
+<div class="container-fluid p-0 m-0">
+    <!--- *Parte principal de mis libros -->
+    <main class="w-100 vh-100 overflow-auto m-0  p-0">
+        <!--*Encabezado-->
+        <header class="d-flex flex-row flex-wrap align-items-center text-bg-light mb-5 py-3 px-4 border-bottom border-2 borderCafeDiscreto">
+            <h2 class="header display-3 tituloEspacioFlex3">Mis libros</h2>
+        </header>
+
+        <!--*Sección de libros-->
+        <div class="d-flex flex-wrap gap-4 p-4">
+
+        <MisLibrosCard 
+            Title="Cien años de soledad" 
+            Author="Gabriel García Márquez" 
+            ImageUrl="https://i.imgur.com/o0pIfOd.jpeg"
+            Status="En proceso">
+        </MisLibrosCard>
+
+        <MisLibrosCard Title="Cien años de soledad"
+            Author="Gabriel García Márquez"
+            ImageUrl="https://i.imgur.com/ZmODEpL.jpeg"
+            Status="En proceso">
+        </MisLibrosCard>
+        </div>
+    </main>
+</div>
 
 @code {
 

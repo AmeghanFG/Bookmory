@@ -1,0 +1,58 @@
+﻿@rendermode InteractiveServer
+
+
+<!-- Tarjeta ejemplo: Pendiente-->
+<div class="card shadow-sm mis-libros-card"
+     onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 10px 28px rgba(0,0,0,.14)'"
+     onmouseout="this.style.transform='';this.style.boxShadow=''">
+
+    <div class="position-relative">
+        <!-- Imagen portada -->
+        <img src="@ImageUrl" class="card-img-top object-fit-cover book-height" alt="Portada">
+
+        <!-- Estado: cambiar clase y texto según estado -->
+        <span class="position-absolute top-0 end-0 mt-2 me-0 px-2 py-1 d-flex align-items-center gap-1 @statusStyle">     
+            <span class="small">●</span> @Status
+        </span>
+    </div>
+
+    <div class="card-body px-3 pt-2 pb-1">
+        <p class="mb-0 fw-bold fs-5 text-dark lh-sm">@Title</p>
+        <p class="mb-2 small text-secondary">@Author</p>
+    </div>
+
+    <div class="d-flex gap-2 px-3 pb-3">
+        <button class="btn btn-sm btn-outline-secondary flex-grow-1">✏️ Editar</button>
+        <button class="btn btn-sm btn-outline-danger">🗑️</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Author { get; set; }
+
+    [Parameter]
+    public string ImageUrl { get; set; }
+
+    [Parameter]
+    public string Status { get; set; }
+
+    string statusStyle = "";
+
+    // método -> el componente que se ejecuta automáticamente cuando el componente recibe parámetros de su componente padre y se asignan sus valores, es parecido a lo que se hacía en Razor
+    protected override void OnParametersSet()
+    {
+        statusStyleSelect();
+    }
+
+    public void statusStyleSelect ()
+    {
+        if (Status == "En proceso") statusStyle = "en-proceso";
+        if (Status == "No empezado") statusStyle = "no-empezado";
+        if (Status == "Terminado") statusStyle = "terminado";
+        if (string.IsNullOrEmpty(Status)) statusStyle = "en-proceso";
+    }
+}
