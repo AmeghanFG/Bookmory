@@ -1,6 +1,9 @@
 ﻿@page "/mis_libros"
 @rendermode InteractiveServer
 @using Bookmory.Components.Shared
+@using Bookmory.Data
+@using Bookmory.Repositorios
+@inject IRepositorioUsuarios repositorioUsuarios
 
 <div class="container-fluid p-0 m-0">
     <!--- Parte principal de mis libros -->
@@ -13,7 +16,7 @@
         <!--Sección de libros-->
         <section class="d-flex flex-wrap gap-4 p-4">
 
-        <MisLibrosCard 
+        @* <MisLibrosCard 
             Title="Cien años de soledad" 
             Author="Gabriel García Márquez" 
             ImageUrl="https://i.imgur.com/o0pIfOd.jpeg"
@@ -24,11 +27,30 @@
             Author="Gabriel García Márquez"
             ImageUrl="https://i.imgur.com/ZmODEpL.jpeg"
             Status="Terminado">
-        </MisLibrosCard>
+        </MisLibrosCard> *@
+
+            @if (misLibros != null)
+            {
+                @foreach (var item in misLibros)
+                {
+                    <MisLibrosCard Title="@item.Libro?.Titulo"
+                                   Author="@($"{item.Libro?.Autor?.Nombre} {item.Libro?.Autor?.ApellidoPaterno}")"
+                                   ImageUrl="@item.Libro?.ImagenUrl"
+                                   Status="@item.Estado">
+                    </MisLibrosCard>
+                }
+            }
         </section>
     </main>
 </div>
 
 @code {
+    List<UsuarioLibro> misLibros = new();
 
+    protected override async Task OnInitializedAsync()
+    {
+        int usuarioId = 1;
+
+        misLibros = await repositorioUsuarios.ObtenerLibrosPorUsuario(usuarioId);
+    }
 }

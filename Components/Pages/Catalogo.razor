@@ -46,9 +46,9 @@
                 @foreach (var libro in libros)
                 {
                     <BookCard Title="@libro.Titulo"
-                    Author="@libro.Autor?.Nombre"
-                            Description="@libro.Descripcion"
-                            ImageUrl="@libro.ImagenUrl">
+                          Author="@($"{libro.Autor?.Nombre} {libro.Autor?.ApellidoPaterno}")"
+                          Description="@libro.Descripcion"
+                          ImageUrl="@libro.ImagenUrl">
                     </BookCard>
             }
 

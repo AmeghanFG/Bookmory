@@ -3,6 +3,7 @@ using Bookmory.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookmory.Migrations
 {
     [DbContext(typeof(DirectorioDBContext))]
-    partial class DirectorioDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260527043953_aa")]
+    partial class aa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,33 +159,6 @@ namespace Bookmory.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("Bookmory.Data.UsuarioLibro", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LibroId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LibroId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("UsuarioLibros");
-                });
-
             modelBuilder.Entity("GeneroLibro", b =>
                 {
                     b.Property<int>("GenerosId")
@@ -217,25 +193,6 @@ namespace Bookmory.Migrations
                     b.Navigation("Editorial");
                 });
 
-            modelBuilder.Entity("Bookmory.Data.UsuarioLibro", b =>
-                {
-                    b.HasOne("Bookmory.Data.Libro", "Libro")
-                        .WithMany("UsuarioLibros")
-                        .HasForeignKey("LibroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Bookmory.Data.Usuario", "Usuario")
-                        .WithMany("UsuarioLibros")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Libro");
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("GeneroLibro", b =>
                 {
                     b.HasOne("Bookmory.Data.Genero", null)
@@ -259,16 +216,6 @@ namespace Bookmory.Migrations
             modelBuilder.Entity("Bookmory.Data.Editorial", b =>
                 {
                     b.Navigation("Libros");
-                });
-
-            modelBuilder.Entity("Bookmory.Data.Libro", b =>
-                {
-                    b.Navigation("UsuarioLibros");
-                });
-
-            modelBuilder.Entity("Bookmory.Data.Usuario", b =>
-                {
-                    b.Navigation("UsuarioLibros");
                 });
 #pragma warning restore 612, 618
         }

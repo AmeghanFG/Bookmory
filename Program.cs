@@ -21,6 +21,9 @@ builder.Services.AddScoped<IRepositorioGeneros, RepositorioGeneros>();
 // Editoriales
 builder.Services.AddScoped<IRepositorioEditoriales, RepositorioEditoriales>();
 
+// Usuarios
+builder.Services.AddScoped<IRepositorioUsuarios, RepositorioUsuarios>();
+
 // dbcontext
 builder.Services.AddDbContext<DirectorioDBContext>(options =>
     options.UseSqlServer(

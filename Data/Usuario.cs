@@ -10,5 +10,8 @@ namespace Bookmory.Data
         [Required(ErrorMessage = "El correo es obligatorio")]
         [EmailAddress(ErrorMessage = "El correo no es válido")]
         public string Correo { get; set; } = string.Empty;
+
+        // Relaciones
+        public virtual List<UsuarioLibro> UsuarioLibros { get; set; }
     }
 }
