@@ -23,7 +23,7 @@
             </form>
         </header>
 
-        <!--Sección de filtros-->
+        <!--Sección de filtros
         <aside class="bg-light p-3 mb-1">
             <section  class="px-2 py-1 d-flex flex-row gap-3 align-items-left">
                 <h4>Género</h4>
@@ -36,7 +36,7 @@
                     <option value="Poesía">Poesía</option>
                 </select>
             </section>
-        </aside>
+        </aside> -->
         <!-- FIN Sección de filtros-->
         <!--Sección de catálgo de libros-->
         <section class="d-flex flex-wrap gap-4 px-2 justify-content-between">
@@ -47,7 +47,7 @@
                 {
                     <BookCard Id="@libro.Id"
                         Title="@libro.Titulo"
-                        Author="@libro.Autor?.Nombre"
+                          Author="@($"{libro.Autor?.Nombre} {libro.Autor?.ApellidoPaterno} {libro.Autor?.ApellidoMaterno}")"
                         Description="@libro.Descripcion"
                         ImageUrl="@libro.ImagenUrl">
                     </BookCard>

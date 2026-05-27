@@ -20,7 +20,7 @@
         {
             <MisLibrosCard Id="@libro.Id"
                 Title="@libro.Libro!.Titulo"
-                Author="@($"{libro.Libro.Autor?.Nombre} {libro.Libro.Autor?.ApellidoPaterno}")"
+                               Author="@($"{libro.Libro.Autor?.Nombre} {libro.Libro.Autor?.ApellidoPaterno} {libro.Libro.Autor?.ApellidoMaterno}")"
                 ImageUrl="@libro.Libro.ImagenUrl"
                 Status="@libro.Estado?.TipoEstado"
                 OnLibroEliminado="RecargarLibros">
