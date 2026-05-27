@@ -1,4 +1,7 @@
 ﻿@rendermode InteractiveServer
+@using Bookmory.Data
+@using Bookmory.Repositorios
+@inject IRepositorioUsuarios repositorioUsuarios
 
 <div class="card p-2" style="width: 18rem;">
     <img src="@ImageUrl" class="card-img-top" alt="...">
@@ -6,7 +9,7 @@
         <h5 class="card-title">@Title</h5>
         <p class="card-text">@Author</p>
         <p class="card-text">@Description</p>
-        <a href="#" class="btn btn-primary">Agregar</a>
+        <a href="mis_libros" class="btn btn-primary" @onclick="Agregar">Agregar</a>
     </div>
 </div>
 
@@ -22,6 +25,15 @@
 
     [Parameter]
     public string ImageUrl { get; set; }
+    [Parameter]
+    public Libro Libro { get; set; }
+    private UsuarioLibro _usuarioLibro = new();
 
+    private async void Agregar(){
+        _usuarioLibro.Libro = Libro;
+        _usuarioLibro.Estado = "Por empezar";
+        _usuarioLibro.Usuario.Id = 2;
 
+        await repositorioUsuarios.AgregarLibrosPorUsuario(_usuarioLibro);
+    }
 }

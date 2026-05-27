@@ -23,5 +23,10 @@ namespace Bookmory.Repositorios
                 .AsNoTracking()
                 .ToListAsync();
         }
+        public async Task AgregarLibrosPorUsuario(UsuarioLibro usuario)
+        {
+            await _context.AddAsync(usuario);
+            await _context.SaveChangesAsync();
+        }
     }
 }

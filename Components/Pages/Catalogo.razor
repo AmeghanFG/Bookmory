@@ -48,7 +48,8 @@
                     <BookCard Title="@libro.Titulo"
                           Author="@($"{libro.Autor?.Nombre} {libro.Autor?.ApellidoPaterno}")"
                           Description="@libro.Descripcion"
-                          ImageUrl="@libro.ImagenUrl">
+                          ImageUrl="@libro.ImagenUrl"
+                          Libro="@libro">
                     </BookCard>
             }
 
