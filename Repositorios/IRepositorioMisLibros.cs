@@ -4,7 +4,13 @@ namespace Bookmory.Repositorios
 {
     public interface IRepositorioMisLibros
     {
-        Task AgregarLibro(int libroId);
+
+        // Aquí se usa bien el crud
+        Task<bool> AgregarLibro(int libroId);
+
+        Task EliminarLibro(int miLibroId);
+
+        Task CambiarEstado(int miLibroId, string nuevoEstado);
 
         Task<List<MiLibro>> ObtenerMisLibros();
     }

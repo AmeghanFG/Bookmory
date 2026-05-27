@@ -1,27 +1,65 @@
 ﻿@rendermode InteractiveServer
+@using Bookmory.Repositorios
+@inject IRepositorioMisLibros repositorioMisLibros
 
 <div class="card p-2" style="width: 18rem;">
-    <img src="@ImageUrl" class="card-img-top" alt="...">
+    <img src="@ImageUrl" class="card-img-top object-fit-cover" height="370" alt="...">
     <div class="card-body">
         <h5 class="card-title">@Title</h5>
         <p class="card-text">@Author</p>
         <p class="card-text">@Description</p>
-        <a href="#" class="btn btn-primary">Agregar</a>
+        <button class="btn btn-primary mb-2" @onclick="Agregar">
+            Agregar
+        </button>
+
+        @if (!string.IsNullOrEmpty(mensaje))
+        {
+            if (mensaje == "Este libro ya está agregado")
+            {
+                <div class="alert alert-warning" role="alert">
+                    @mensaje
+                </div>
+            } else
+            {
+                <div class="alert alert-success" role="alert">
+                    @mensaje
+                </div>
+            }
+        }
     </div>
 </div>
 
 @code {
+    // Ocupo el id para identificar el libro y poder agregarlo a "Mis libros"
     [Parameter]
-    public string Title { get; set; }
+    public int Id { get; set; }
 
     [Parameter]
-    public string Author { get; set; }
+    public string Title { get; set; } = string.Empty;
 
     [Parameter]
-    public string Description { get; set; }
+    public string Author { get; set; } = string.Empty;
 
     [Parameter]
-    public string ImageUrl { get; set; }
+    public string Description { get; set; } = string.Empty;
 
+    [Parameter]
+    public string ImageUrl { get; set; } = string.Empty;
+
+    private string mensaje = "";
+
+    private async Task Agregar()
+    {
+        bool agregado = await repositorioMisLibros.AgregarLibro(Id);
+
+        if (agregado)
+        {
+            mensaje = "Libro agregado";
+        }
+        else
+        {
+            mensaje = "Este libro ya está agregado";
+        }
+    }
 
 }

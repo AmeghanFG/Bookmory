@@ -1,8 +1,9 @@
 ﻿@rendermode InteractiveServer
+@using Bookmory.Repositorios
+@inject IRepositorioMisLibros repositorioMisLibros
 
-
-<!-- Tarjeta ejemplo-->
-<div class="card shadow-sm mis-libros-card"
+<!-- Tarjeta-->
+<div class="card shadow-sm mis-libros-card justify-content-between"
      onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 10px 28px rgba(0,0,0,.14)'"
      onmouseout="this.style.transform='';this.style.boxShadow=''">
 
@@ -22,16 +23,19 @@
     </div>
 
     <div class="d-flex gap-2 px-3 pb-3">
-        <select class="form-select" @bind="_estado" aria-label="Seleccionar estado">
+        <select class="form-select" @bind="_estado" @bind:after="EstadoCambiado" aria-label="Seleccionar estado">
             <option value="no-empezado">No empezado</option>
             <option value="en-proceso">En proceso</option>
             <option value="terminado">Terminado</option>
         </select>
-        <button class="btn btn-sm btn-outline-danger">🗑️</button>
+        <button class="btn btn-sm btn-outline-danger" @onclick="Eliminar">🗑️</button>
     </div>
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
+
     [Parameter]
     public string Title { get; set; }
 
@@ -43,6 +47,10 @@
 
     [Parameter]
     public string Status { get; set; }
+
+    // La IA me dio EvenCallback, investigando, notifica al componente padre, investigación: https://dev.to/stevsharp/mastering-blazor-component-communication-eventcallback-cascadingparameter-and-ref-explained-eig, recuerdo vagamente que algo así se podía en react, estudiar que era
+    [Parameter]
+    public EventCallback OnLibroEliminado { get; set; }
 
     string statusStyle = "";
 
@@ -60,5 +68,35 @@
         if (Status == "No empezado") statusStyle = "no-empezado";
         if (Status == "Terminado") statusStyle = "terminado";
         if (string.IsNullOrEmpty(Status)) statusStyle = "no-empezado";
+    }
+
+    private async Task Eliminar()
+    {
+        await repositorioMisLibros.EliminarLibro(Id);
+        await OnLibroEliminado.InvokeAsync(); // Aquí es donde notifica al componente padre cuando se ejecuta el método
+    }
+
+    // Método para convertir value de estado de nuevo por que se me ocurrio poner una clase css con esos nombres pero para la base de datos ocupo el normal como "No empezado"
+    private string FormatearEstadoBD()
+    {
+        if (_estado == "no-empezado")
+            return "No empezado";
+
+        if (_estado == "en-proceso")
+            return "En proceso";
+
+        if (_estado == "terminado")
+            return "Terminado";
+
+        return "No empezado";
+    }
+
+    private async Task EstadoCambiado()
+    {
+        await repositorioMisLibros.CambiarEstado(Id, FormatearEstadoBD());
+
+        Status = FormatearEstadoBD();
+
+        statusStyleSelect(); // Para actualizar la tag de la clase de css
     }
 }

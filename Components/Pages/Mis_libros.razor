@@ -1,6 +1,9 @@
 ﻿@page "/mis_libros"
 @rendermode InteractiveServer
 @using Bookmory.Components.Shared
+@using Bookmory.Data
+@using Bookmory.Repositorios
+@inject IRepositorioMisLibros repositorioMisLibros
 
 <div class="container-fluid p-0 m-0">
     <!--- Parte principal de mis libros -->
@@ -13,22 +16,40 @@
         <!--Sección de libros-->
         <section class="d-flex flex-wrap gap-4 p-4">
 
-        <MisLibrosCard 
-            Title="Cien años de soledad" 
-            Author="Gabriel García Márquez" 
-            ImageUrl="https://i.imgur.com/o0pIfOd.jpeg"
-            Status="En proceso">
-        </MisLibrosCard>
+        @foreach (var libro in misLibros)
+        {
+            <MisLibrosCard Id="@libro.Id"
+                Title="@libro.Libro!.Titulo"
+                Author="@($"{libro.Libro.Autor?.Nombre} {libro.Libro.Autor?.ApellidoPaterno}")"
+                ImageUrl="@libro.Libro.ImagenUrl"
+                Status="@libro.Estado?.TipoEstado"
+                OnLibroEliminado="RecargarLibros">
+            </MisLibrosCard>
+        }
 
-        <MisLibrosCard Title="Cien años de soledad"
+        <!--
+        <MisLibrosCard Id=""
+            Title="Cien años de soledad"
             Author="Gabriel García Márquez"
-            ImageUrl="https://i.imgur.com/ZmODEpL.jpeg"
+            ImageUrl=""
             Status="Terminado">
-        </MisLibrosCard>
+        </MisLibrosCard>-->
         </section>
     </main>
 </div>
 
 @code {
+    private List<MiLibro> misLibros = new();
 
+    protected override async Task OnInitializedAsync()
+    {
+        misLibros = await repositorioMisLibros.ObtenerMisLibros();
+    }
+
+    private async Task RecargarLibros()
+    {
+        misLibros = await repositorioMisLibros.ObtenerMisLibros();
+
+        StateHasChanged();
+    }
 }
