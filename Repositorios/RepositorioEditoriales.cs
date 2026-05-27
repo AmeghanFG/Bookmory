@@ -12,7 +12,7 @@ namespace Bookmory.Repositorios
             _context = context;
         }
 
-        public async Task<Editorial?> ObtenerEditorialPorId(int id)
+        public async Task<Editorial?> ObtenerEditorialPorID(int id)
         {
             return await _context.Editoriales.AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
         }
@@ -20,11 +20,6 @@ namespace Bookmory.Repositorios
         public async Task<List<Editorial>> ObtenerEditoriales()
         {
             return await _context.Editoriales.AsNoTracking().Include(e => e.Libros).ToListAsync();
-        }
-
-        public Task<Editorial> ObtenerEditorialPorID(int id)
-        {
-            throw new NotImplementedException();
-        }
+        } 
     }
 }
