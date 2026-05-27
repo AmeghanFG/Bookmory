@@ -13,5 +13,6 @@ namespace Bookmory.Data
         // Relaciones
         public int AutorId { get; set; }
         virtual public Autor? Autor { get; set; }
+        virtual public List<Genero> Generos { get; set; }
     }
 }
