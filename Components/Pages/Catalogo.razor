@@ -4,6 +4,7 @@
 @using Bookmory.Data
 @using Bookmory.Repositorios
 @inject IRepositorioLibros repositorioLibros
+@inject IRepositorioGeneros repositorioGeneros
 
 <div class="container-fluid p-0 m-0">
     <!--- Parte principal -->
@@ -29,11 +30,10 @@
                 <h4>Género</h4>
                 <select class="form-select w-25" @bind="_generoSeleccionado" aria-label="Seleccionar género">
                     <option value="">Todos</option>
-                    <option value="Ficción">Ficción</option>
-                    <option value="Historia">Historia</option>
-                    <option value="Ciencia">Ciencia</option>
-                    <option value="Terror">Terror</option>
-                    <option value="Poesía">Poesía</option>
+                    @foreach(var genero in generos)
+                    {
+                        <option value="@genero.Id">@genero.Genero_txt</option>                    
+                    }
                 </select>
             </section>
         </aside>
@@ -72,9 +72,11 @@
 @code {
     private string _generoSeleccionado = string.Empty;
     private List<Libro> libros = new();
+    private List<Genero> generos = new();
 
     protected override async Task OnInitializedAsync()
     {
         libros = await repositorioLibros.ObtenerLibros();
+        generos = await repositorioGeneros.ObtenerGeneros();
     }
 }
