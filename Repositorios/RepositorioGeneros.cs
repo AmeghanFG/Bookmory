@@ -15,7 +15,7 @@ namespace Bookmory.Repositorios
 
         public async Task<List<Genero>> ObtenerGeneros()
         {
-            await _context.Generos.ToListAsync();
+            return await _context.Generos.ToListAsync();
         }
     }
 }
