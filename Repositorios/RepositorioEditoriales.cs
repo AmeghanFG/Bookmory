@@ -19,7 +19,7 @@ namespace Bookmory.Repositorios
 
         public async Task<List<Editorial>> ObtenerEditoriales()
         {
-            return await _context.Editoriales.AsNoTracking().ToListAsync();
+            return await _context.Editoriales.AsNoTracking().Include(e => e.Libros).ToListAsync();
         }
 
         public Task<Editorial> ObtenerEditorialPorID(int id)
