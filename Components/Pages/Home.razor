@@ -63,13 +63,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in misLibros)
+                        @foreach (var libro in misLibros)
                         {
                             <tr>
-                                <td>@item.Libro?.Titulo</td>
-                                <td>@($"{item.Libro?.Autor?.Nombre} {item.Libro?.Autor?.ApellidoPaterno}")</td> 
-                                <td> <span class="estadoLibro @colorEstado(item.Estado?.TipoEstado) w-50">
-                                        <span>&#9679;</span> @item.Estado?.TipoEstado
+                                <td>@libro.Libro?.Titulo</td>
+                                <td>@($"{libro.Libro?.Autor?.Nombre} {libro.Libro?.Autor?.ApellidoPaterno}")</td> 
+                                <td> <span class="estadoLibro @colorEstado(libro.Estado?.TipoEstado) w-50">
+                                        <span>&#9679;</span> @libro.Estado?.TipoEstado
                                     </span>
                                 </td>
                             </tr>
