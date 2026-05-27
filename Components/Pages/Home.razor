@@ -61,7 +61,6 @@
                             <th>LIBRO</th>
                             <th>AUTOR</th>
                             <th>ESTADO</th>
-                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -109,19 +108,6 @@
                                         <span>&#9679;</span>
                                         @item.Estado
                                     </span>
-                                </td>
-
-                                <td>
-                                    <!-- BOTON EDITAR -->
-                                    <button>
-                                        ✏️
-                                    </button>
-
-                                    <!-- BOTON ELIMINAR -->
-                                    <button>
-                                        🗑️
-                                    </button>
-
                                 </td>
                             </tr>
                         }
@@ -191,7 +177,7 @@
         total = misLibros.Count;
         terminados = misLibros.Count(x => x.Estado == "Terminado");
         enProceso = misLibros.Count(x => x.Estado == "En proceso");
-        sinEmpezar = misLibros.Count(x => x.Estado == "Pendiente");
+        sinEmpezar = misLibros.Count(x => x.Estado == "Sin Empezar");
 
         if (total > 0)
         {

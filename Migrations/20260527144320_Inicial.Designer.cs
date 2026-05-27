@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookmory.Migrations
 {
     [DbContext(typeof(DirectorioDBContext))]
-    [Migration("20260527041754_inicial")]
-    partial class inicial
+    [Migration("20260527144320_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -159,6 +159,33 @@ namespace Bookmory.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("Bookmory.Data.UsuarioLibro", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LibroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LibroId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("UsuarioLibros");
+                });
+
             modelBuilder.Entity("GeneroLibro", b =>
                 {
                     b.Property<int>("GenerosId")
@@ -193,6 +220,25 @@ namespace Bookmory.Migrations
                     b.Navigation("Editorial");
                 });
 
+            modelBuilder.Entity("Bookmory.Data.UsuarioLibro", b =>
+                {
+                    b.HasOne("Bookmory.Data.Libro", "Libro")
+                        .WithMany("UsuarioLibros")
+                        .HasForeignKey("LibroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Bookmory.Data.Usuario", "Usuario")
+                        .WithMany("UsuarioLibros")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Libro");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("GeneroLibro", b =>
                 {
                     b.HasOne("Bookmory.Data.Genero", null)
@@ -216,6 +262,16 @@ namespace Bookmory.Migrations
             modelBuilder.Entity("Bookmory.Data.Editorial", b =>
                 {
                     b.Navigation("Libros");
+                });
+
+            modelBuilder.Entity("Bookmory.Data.Libro", b =>
+                {
+                    b.Navigation("UsuarioLibros");
+                });
+
+            modelBuilder.Entity("Bookmory.Data.Usuario", b =>
+                {
+                    b.Navigation("UsuarioLibros");
                 });
 #pragma warning restore 612, 618
         }

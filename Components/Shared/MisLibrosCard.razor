@@ -27,13 +27,16 @@
             <option value="en-proceso">En proceso</option>
             <option value="terminado">Terminado</option>
         </select>
-        <button class="btn btn-sm btn-outline-danger">🗑️</button>
+        @* <button class="btn btn-sm btn-outline-danger" @onclick="Eliminar">🗑️</button> *@
     </div>
 </div>
 
 @code {
     [Parameter]
     public string Title { get; set; }
+
+    // [Parameter]
+    // public int Id { get; set; }
 
     [Parameter]
     public string Author { get; set; }
@@ -60,5 +63,10 @@
         if (Status == "No empezado") statusStyle = "no-empezado";
         if (Status == "Terminado") statusStyle = "terminado";
         if (string.IsNullOrEmpty(Status)) statusStyle = "no-empezado";
+    }
+
+    private async Task EliminarLibro()
+    {
+        // await OnEliminar.InvokeAsync();
     }
 }
