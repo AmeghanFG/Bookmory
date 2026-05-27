@@ -15,6 +15,6 @@ namespace Bookmory.Data
         virtual public Autor? Autor { get; set; }
         public int EditorialId { get; set; }
         virtual public Editorial? Editorial { get; set; }
-        virtual public List<Genero> Generos { get; set; }
+        virtual public List<Genero?> Generos { get; set; }
     }
 }
