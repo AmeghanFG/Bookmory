@@ -1,5 +1,6 @@
 ﻿@page "/"
 @rendermode InteractiveServer
+@inject NavigationManager NavManager
 
 @using Bookmory.Data
 @using Bookmory.Repositorios
@@ -52,7 +53,7 @@
         <!--Libros recientes-->
         <section class="d-flex">
             <section class="text-bg-light seccionBordes flex-grow-1 table-responsive">
-                <h3 class="tituloTabla"> <span>Libros recientes</span> <span><a href="#">Ver todos →</a></span></h3>
+                <h3 class="tituloTabla"> <span>Libros recientes</span> <span><a href="#" @onclick="IrAMisLibros">Ver todos →</a></span></h3>
                 <table class="table table-borderless">
                     <thead class="table-dark">
                         <tr>
@@ -146,6 +147,11 @@
             default:
                 return "";
         }
+    }
+
+    private void IrAMisLibros()
+    {
+        NavManager.NavigateTo("mis_libros");
     }
 
     protected override async Task OnInitializedAsync()
