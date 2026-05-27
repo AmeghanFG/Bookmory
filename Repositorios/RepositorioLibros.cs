@@ -15,7 +15,7 @@ namespace Bookmory.Repositorios
 
         public async Task<List<Libro>> ObtenerLibros()
         {
-            return await _context.Libros.Include(l => l.Autor).AsNoTracking().ToListAsync();
+            return await _context.Libros.Include(l => l.Autor).Include(l=> l.Editorial).AsNoTracking().ToListAsync();
         }
     }
 }
