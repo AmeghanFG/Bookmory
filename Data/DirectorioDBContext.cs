@@ -7,6 +7,6 @@ namespace Bookmory.Data
         public DbSet<Autor> Autores { get; set; }
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Usuario> Generos { get; set; }
+        public DbSet<Genero> Generos { get; set; }
     }
 }
