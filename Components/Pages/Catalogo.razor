@@ -1,6 +1,9 @@
 ﻿@page "/catalogo"
 @rendermode InteractiveServer
 @using Bookmory.Components.Shared
+@using Bookmory.Data
+@using Bookmory.Repositorios
+@inject IRepositorioLibros repositorioLibros
 
 <div class="container-fluid p-0 m-0">
     <!--- Parte principal -->
@@ -39,26 +42,18 @@
         <section class="d-flex flex-wrap gap-4 px-2 justify-content-between">
             <!-- TODO: Acomodar tamaño de imagen para que todas las tarjetas tengan el mismo tamaño de imagen, creo que ocupan el mismo alto sin importar el tamaño ed la imagen, creo que eso no se debe corregir, eliminar ejemplos-->
             <!--Documentación de tarjetas https://getbootstrap.com/docs/5.3/components/card/-->
-            <BookCard 
-                Title="Cien años de soledad" 
-                Author="Gabriel García Márquez"
-                Description="Novela que narra la historia de siete generaciones de la familia Buendía en el pueblo ficticio de Macondo" 
-                ImageUrl="https://i.imgur.com/o0pIfOd.jpeg">
-            </BookCard>
 
-            <BookCard Title="Cien años de soledad"
-                      Author="Gabriel García Márquez"
-                      Description="Novela que narra la historia de siete generaciones de la familia Buendía en el pueblo ficticio de Macondo"
-                      ImageUrl="https://i.imgur.com/o0pIfOd.jpeg">
-            </BookCard>
+                @foreach (var libro in libros)
+                {
+                    <BookCard Title="@libro.Titulo"
+                    Author="@libro.Autor?.Nombre"
+                            Description="@libro.Descripcion"
+                            ImageUrl="@libro.ImagenUrl">
+                    </BookCard>
+            }
 
-            <BookCard Title="Pedro Páramo"
-                      Author="Juan Rulfo"
-                      Description="Obra maestra de la literatura hispanoamericana escrita por Juan Rulfo y publicada en 1955"
-                      ImageUrl="https://i.imgur.com/ZmODEpL.jpeg">
-            </BookCard>
 
-            <BookCard Title="Memorias del subsuelo"
+            @* <BookCard Title="Memorias del subsuelo"
                       Author="Fiódor Dostoyevski"
                       Description="Narra el monólogo de un amargado exfuncionario de 40 años que vive aislado en una especie de subsuelo mental y físico."
                       ImageUrl="https://i.imgur.com/pt9rGiS.jpegg">
@@ -68,7 +63,7 @@
                       Author="Fiódor Dostoyevski"
                       Description="Narra el monólogo de un amargado exfuncionario de 40 años que vive aislado en una especie de subsuelo mental y físico."
                       ImageUrl="https://i.imgur.com/pt9rGiS.jpegg">
-            </BookCard>
+            </BookCard> *@
         </section>
         <!--Sección de catálgo de libros-->
     </main>
@@ -76,4 +71,10 @@
 
 @code {
     private string _generoSeleccionado = string.Empty;
+    private List<Libro> libros = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        libros = await repositorioLibros.ObtenerLibros();
+    }
 }

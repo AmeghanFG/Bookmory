@@ -1,10 +1,24 @@
 using Bookmory.Components;
+using Bookmory.Data;
+using Bookmory.Repositorios;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// libros
+builder.Services.AddScoped<IRepositorioLibros, RepositorioLibros>();
+
+//autores 
+builder.Services.AddScoped<IRepositorioAutores, RepositorioAutores>();
+
+// dbcontext
+builder.Services.AddDbContext<DirectorioDBContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
