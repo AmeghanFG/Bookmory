@@ -12,6 +12,9 @@ builder.Services.AddRazorComponents()
 // libros
 builder.Services.AddScoped<IRepositorioLibros, RepositorioLibros>();
 
+// mis libros
+builder.Services.AddScoped<IRepositorioMisLibros, RepositorioMisLibros>();
+
 //autores 
 builder.Services.AddScoped<IRepositorioAutores, RepositorioAutores>();
 
