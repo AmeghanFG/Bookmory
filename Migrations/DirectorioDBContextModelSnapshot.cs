@@ -43,7 +43,7 @@ namespace Bookmory.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Autores", (string)null);
+                    b.ToTable("Autores");
                 });
 
             modelBuilder.Entity("Bookmory.Data.Editorial", b =>
@@ -60,7 +60,7 @@ namespace Bookmory.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Editoriales", (string)null);
+                    b.ToTable("Editoriales");
                 });
 
             modelBuilder.Entity("Bookmory.Data.Estado", b =>
@@ -77,7 +77,7 @@ namespace Bookmory.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Estados", (string)null);
+                    b.ToTable("Estados");
                 });
 
             modelBuilder.Entity("Bookmory.Data.Genero", b =>
@@ -94,7 +94,7 @@ namespace Bookmory.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Generos", (string)null);
+                    b.ToTable("Generos");
                 });
 
             modelBuilder.Entity("Bookmory.Data.Libro", b =>
@@ -132,7 +132,7 @@ namespace Bookmory.Migrations
 
                     b.HasIndex("EditorialId");
 
-                    b.ToTable("Libros", (string)null);
+                    b.ToTable("Libros");
                 });
 
             modelBuilder.Entity("Bookmory.Data.Usuario", b =>
@@ -153,7 +153,7 @@ namespace Bookmory.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios", (string)null);
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("GeneroLibro", b =>
@@ -168,7 +168,7 @@ namespace Bookmory.Migrations
 
                     b.HasIndex("LibrosId");
 
-                    b.ToTable("GeneroLibro", (string)null);
+                    b.ToTable("GeneroLibro");
                 });
 
             modelBuilder.Entity("Bookmory.Data.Libro", b =>

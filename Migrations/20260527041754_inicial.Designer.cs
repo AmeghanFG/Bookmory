@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookmory.Migrations
 {
     [DbContext(typeof(DirectorioDBContext))]
-    [Migration("20260527030223_inicial")]
+    [Migration("20260527041754_inicial")]
     partial class inicial
     {
         /// <inheritdoc />
