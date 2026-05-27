@@ -1,5 +1,8 @@
 ﻿@page "/"
 @rendermode InteractiveServer
+@using Bookmory.Data
+@using Bookmory.Repositorios
+@inject IRepositorioUsuarios repositorioUsuarios
 
 <div class="container-fluid p-0 m-0">
     <!--- Parte principal -->
@@ -14,7 +17,7 @@
             <div class="text-bg-light bordesTarjetasEstado tarjetaEstado flex-grow-1">
                 <img class="iconoTarjeta" src="https://cdn-icons-png.flaticon.com/128/5832/5832416.png">
                 <div>
-                    <p class="numeroTarjeta">12</p>
+                    <p class="numeroTarjeta">@total</p>
                     <p class="textoTarjeta">Total de libros</p>
                 </div>
             </div>
@@ -22,7 +25,7 @@
             <div class="text-bg-light bordesTarjetasEstado tarjetaEstado flex-grow-1">
                 <img class="iconoTarjeta" src="https://cdn-icons-png.flaticon.com/512/16799/16799608.png">
                 <div>
-                    <p class="numeroTarjeta">20</p>
+                    <p class="numeroTarjeta">@terminados</p>
                     <p class="textoTarjeta">Terminados</p>
                 </div>
             </div>
@@ -30,7 +33,7 @@
             <div class="text-bg-light bordesTarjetasEstado tarjetaEstado flex-grow-1">
                 <img class="iconoTarjeta" src="https://images.emojiterra.com/google/android-12l/512px/1f4d6.png">
                 <div>
-                    <p class="numeroTarjeta">7</p>
+                    <p class="numeroTarjeta">@enProceso</p>
                     <p class="textoTarjeta">En proceso</p>
                 </div>
             </div>
@@ -39,7 +42,7 @@
                 <img class="iconoTarjeta"
                      src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/1024px/1f4ed.png">
                 <div>
-                    <p class="numeroTarjeta">3</p>
+                    <p class="numeroTarjeta">@sinEmpezar</p>
                     <p class="textoTarjeta">Sin empezar</p>
                 </div>
             </div>
@@ -59,7 +62,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                    @*     <tr>
                             <td><span>Portada</span> Libro ejemplo</td>
                             <td> Autor ejemplo</td>
                             <td> <span class="estadoLibro"> <span>&#9679;</span> Estado ejemplo</span></td>
@@ -76,7 +79,47 @@
                                 </svg>
                             </button>
                         </td>
-                    </tr>
+                    </tr> *@
+
+                        @foreach (var item in misLibros)
+                        {
+                            <tr>
+
+                                <td>
+                                    <img src="@item.Libro?.ImagenUrl"
+                                         width="40"
+                                         height="60"
+                                         style="object-fit:cover; margin-right:10px;" />
+
+                                    @item.Libro?.Titulo
+                                </td>
+
+                                <td>
+                                    @item.Libro?.Autor?.Nombre
+                                    @item.Libro?.Autor?.ApellidoPaterno
+                                </td>
+
+                                <td>
+                                    <span class="estadoLibro">
+                                        <span>&#9679;</span>
+                                        @item.Estado
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <!-- BOTON EDITAR -->
+                                    <button>
+                                        ✏️
+                                    </button>
+
+                                    <!-- BOTON ELIMINAR -->
+                                    <button>
+                                        🗑️
+                                    </button>
+
+                                </td>
+                            </tr>
+                        }
                 </tbody>
             </table>
         </section>
@@ -89,35 +132,35 @@
                 <img class="iconoProgreso" src="https://cdn-icons-png.flaticon.com/512/16799/16799608.png">
                 <label>Terminados:</label>
                 <div class="datosProgreso">
-                    <span>20 libros</span>
+                    <span>@terminados</span>
                     <span>•</span>
-                    <span>70%</span>
+                    <span>@pTerminados%</span>
                 </div>
             </div>
-            <progress class="barraTerminados" max="100" value="70"></progress>
+            <progress class="barraTerminados" max="100" value="@pTerminados"></progress>
 
             <div class="filaProgreso">
                 <img class="iconoProgreso" src="https://images.emojiterra.com/google/android-12l/512px/1f4d6.png">
                 <label>En proceso:</label>
                 <div class="datosProgreso">
-                    <span>7 libros</span>
+                    <span>@enProceso libros</span>
                     <span>•</span>
-                    <span>40%</span>
+                    <span>@pProceso%</span>
                 </div>
             </div>
-            <progress class="barraProceso" max="100" value="40"></progress>
+            <progress class="barraProceso" max="100" value="@pProceso"></progress>
 
             <div class="filaProgreso">
                 <img class="iconoProgreso"
                      src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/color/1024px/1f4ed.png">
                 <label>Sin empezar:</label>
                 <div class="datosProgreso">
-                    <span>3 libros</span>
+                    <span>@sinEmpezar libros</span>
                     <span>•</span>
-                    <span>20%</span>
+                    <span>@pSinEmpezar%</span>
                 </div>
             </div>
-            <progress class="barraSinEmpezar" max="100" value="20"></progress>
+            <progress class="barraSinEmpezar" max="100" value="@pSinEmpezar"></progress>
         </section>
         <!--FIN Estadisticas de libros-->
     </section>
@@ -125,5 +168,31 @@
     </main>
 </div>
 @code {
+    List<UsuarioLibro> misLibros = new();
 
+    int total;
+    int terminados;
+    int enProceso;
+    int sinEmpezar;
+    int pTerminados;
+    int pProceso;
+    int pSinEmpezar;
+
+    protected override async Task OnInitializedAsync()
+    {
+        int usuarioId = 2;
+        misLibros = await repositorioUsuarios.ObtenerLibrosPorUsuario(usuarioId);
+
+        total = misLibros.Count;
+        terminados = misLibros.Count(x => x.Estado == "Terminado");
+        enProceso = misLibros.Count(x => x.Estado == "En proceso");
+        sinEmpezar = misLibros.Count(x => x.Estado == "Pendiente");
+
+        if (total > 0)
+        {
+            pTerminados = (terminados * 100) / total;
+            pProceso = (enProceso * 100) / total;
+            pSinEmpezar = (sinEmpezar * 100) / total;
+        }
+    }
 }
