@@ -5,7 +5,7 @@
 namespace Bookmory.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +26,19 @@ namespace Bookmory.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Editoriales",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Editoriales", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Estados",
                 columns: table => new
                 {
@@ -36,6 +49,19 @@ namespace Bookmory.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Estados", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Generos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Genero_txt = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Generos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,7 +88,8 @@ namespace Bookmory.Migrations
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AñoPublicacion = table.Column<int>(type: "int", nullable: false),
                     ImagenUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AutorId = table.Column<int>(type: "int", nullable: false)
+                    AutorId = table.Column<int>(type: "int", nullable: false),
+                    EditorialId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,12 +100,52 @@ namespace Bookmory.Migrations
                         principalTable: "Autores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Libros_Editoriales_EditorialId",
+                        column: x => x.EditorialId,
+                        principalTable: "Editoriales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "GeneroLibro",
+                columns: table => new
+                {
+                    GenerosId = table.Column<int>(type: "int", nullable: false),
+                    LibrosId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GeneroLibro", x => new { x.GenerosId, x.LibrosId });
+                    table.ForeignKey(
+                        name: "FK_GeneroLibro_Generos_GenerosId",
+                        column: x => x.GenerosId,
+                        principalTable: "Generos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GeneroLibro_Libros_LibrosId",
+                        column: x => x.LibrosId,
+                        principalTable: "Libros",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GeneroLibro_LibrosId",
+                table: "GeneroLibro",
+                column: "LibrosId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Libros_AutorId",
                 table: "Libros",
                 column: "AutorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Libros_EditorialId",
+                table: "Libros",
+                column: "EditorialId");
         }
 
         /// <inheritdoc />
@@ -88,13 +155,22 @@ namespace Bookmory.Migrations
                 name: "Estados");
 
             migrationBuilder.DropTable(
-                name: "Libros");
+                name: "GeneroLibro");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
 
             migrationBuilder.DropTable(
+                name: "Generos");
+
+            migrationBuilder.DropTable(
+                name: "Libros");
+
+            migrationBuilder.DropTable(
                 name: "Autores");
+
+            migrationBuilder.DropTable(
+                name: "Editoriales");
         }
     }
 }
