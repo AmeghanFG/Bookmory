@@ -15,14 +15,14 @@
             <h2 class="header display-3 tituloEspacioFlex3">Catálogo de libros</h2>
 
             <!--Barra de busqueda-->
-            <form class="d-flex align-items-center" role="search">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-dark" type="submit">
+            <div class="d-flex align-items-center">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" @bind="busqueda" />
+                <button class="btn btn-dark" type="submit" @onclick="BuscarLibro">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
                 </button>
-            </form>
+            </div>
         </header>
 
         <!--Sección de filtros-->
@@ -73,15 +73,42 @@
 </div>
 
 @code {
+    private string busqueda = string.Empty;
+    // private string mensaje = "No se encontraron coincidencias.";
+    // private bool mostrarMensaje = false;
+
     private string _generoSeleccionado = string.Empty;
     private List<Libro> libros = new();
     private List<Genero> generos = new();
+    private List<Libro> LibrosBusqueda = new();
 
     // agregar y validación estpa en la bookcard
 
     protected override async Task OnInitializedAsync()
     {
-        libros = await repositorioLibros.ObtenerLibros();
+        LibrosBusqueda = await repositorioLibros.ObtenerLibros();
+        libros = LibrosBusqueda;
         generos = await repositorioGeneros.ObtenerGeneros();
+    }
+
+    private void BuscarLibro()
+    {
+        if (string.IsNullOrWhiteSpace(busqueda))
+        {
+            libros = LibrosBusqueda;
+        }
+        else
+        {
+            var busq = libros = LibrosBusqueda.Where(l => l.Titulo.Contains(busqueda, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            if (busq.Count > 0)
+            {
+                libros = busq;
+            }
+            else
+            {
+                libros = LibrosBusqueda;
+            }
+        }
     }
 }

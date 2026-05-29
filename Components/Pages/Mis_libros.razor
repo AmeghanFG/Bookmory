@@ -38,7 +38,7 @@
                          ImageUrl="@item.Libro?.ImagenUrl"
                          Status="@item.Estado?.TipoEstado"
                          Id="@item.Id"
-                        OnEliminar="RecargarLibros">
+                         OnEliminar="RecargarLibros">
                     </MisLibrosCard>
                 }
             }
@@ -59,7 +59,6 @@
     {
         int usuarioId = 2;
 
-        misLibros = await repositorioUsuarios
-            .ObtenerLibrosPorUsuario(usuarioId);
+        misLibros = await repositorioUsuarios.ObtenerLibrosPorUsuario(usuarioId);
     }
 }

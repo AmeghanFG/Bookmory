@@ -75,7 +75,6 @@
         {
             mensaje = "Este libro ya está agregado";
             libroEnLista = true;
-
             return;
         }
 
@@ -85,7 +84,6 @@
             LibroId = LibroId,
             EstadoId = 1 // Sin empezar
         };
-
         await repositorioUsuarios.AgregarLibroPorUsuario(usuarioLibro);
 
         mensaje = "Libro agregado correctamente";
