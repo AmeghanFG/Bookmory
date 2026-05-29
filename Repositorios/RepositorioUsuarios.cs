@@ -20,6 +20,7 @@ namespace Bookmory.Repositorios
                     .ThenInclude(l => l.Autor)
                 .Include(ul => ul.Libro)
                     .ThenInclude(l => l.Editorial)
+                .Include(ul => ul.Estado)
                 .AsNoTracking()
                 .ToListAsync();
         }

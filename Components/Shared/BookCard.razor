@@ -83,7 +83,7 @@
         {
             UsuarioId = usuarioId,
             LibroId = LibroId,
-            Estado = "Sin empezar"
+            EstadoId = 1 // Sin empezar
         };
 
         await repositorioUsuarios.AgregarLibroPorUsuario(usuarioLibro);

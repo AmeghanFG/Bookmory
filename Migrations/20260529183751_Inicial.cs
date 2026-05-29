@@ -140,11 +140,17 @@ namespace Bookmory.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
                     LibroId = table.Column<int>(type: "int", nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    EstadoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsuarioLibros", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UsuarioLibros_Estados_EstadoId",
+                        column: x => x.EstadoId,
+                        principalTable: "Estados",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UsuarioLibros_Libros_LibroId",
                         column: x => x.LibroId,
@@ -175,6 +181,11 @@ namespace Bookmory.Migrations
                 column: "EditorialId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UsuarioLibros_EstadoId",
+                table: "UsuarioLibros",
+                column: "EstadoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UsuarioLibros_LibroId",
                 table: "UsuarioLibros",
                 column: "LibroId");
@@ -189,9 +200,6 @@ namespace Bookmory.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Estados");
-
-            migrationBuilder.DropTable(
                 name: "GeneroLibro");
 
             migrationBuilder.DropTable(
@@ -199,6 +207,9 @@ namespace Bookmory.Migrations
 
             migrationBuilder.DropTable(
                 name: "Generos");
+
+            migrationBuilder.DropTable(
+                name: "Estados");
 
             migrationBuilder.DropTable(
                 name: "Libros");

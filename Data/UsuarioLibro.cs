@@ -12,6 +12,7 @@
         public int LibroId { get; set; }
         public virtual Libro? Libro { get; set; }
 
-        public string Estado { get; set; } = "Sin empezar"; // antes string empty, hay q editarlo por el id del estado
+        public int EstadoId { get; set; } =  1; // antes string empty, hay q editarlo por el id del estado
+        public virtual Estado? Estado { get; set; }
     }
 }

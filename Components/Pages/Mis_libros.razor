@@ -36,7 +36,7 @@
                     <MisLibrosCard Title="@item.Libro?.Titulo"
                                    Author="@($"{item.Libro?.Autor?.Nombre} {item.Libro?.Autor?.ApellidoPaterno}")"
                                    ImageUrl="@item.Libro?.ImagenUrl"
-                                   Status="@item.Estado">
+                                   Status="@item.Estado?.TipoEstado">
                     </MisLibrosCard>
                 }
             }

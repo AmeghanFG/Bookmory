@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookmory.Migrations
 {
     [DbContext(typeof(DirectorioDBContext))]
-    [Migration("20260527144320_Inicial")]
+    [Migration("20260529183751_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -167,9 +167,8 @@ namespace Bookmory.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("EstadoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("LibroId")
                         .HasColumnType("int");
@@ -178,6 +177,8 @@ namespace Bookmory.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EstadoId");
 
                     b.HasIndex("LibroId");
 
@@ -222,6 +223,12 @@ namespace Bookmory.Migrations
 
             modelBuilder.Entity("Bookmory.Data.UsuarioLibro", b =>
                 {
+                    b.HasOne("Bookmory.Data.Estado", "Estado")
+                        .WithMany()
+                        .HasForeignKey("EstadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Bookmory.Data.Libro", "Libro")
                         .WithMany("UsuarioLibros")
                         .HasForeignKey("LibroId")
@@ -233,6 +240,8 @@ namespace Bookmory.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Estado");
 
                     b.Navigation("Libro");
 

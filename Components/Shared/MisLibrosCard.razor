@@ -23,7 +23,7 @@
 
     <div class="d-flex gap-2 px-3 pb-3">
         <select class="form-select" @bind="_estado" aria-label="Seleccionar estado">
-            <option value="no-empezado">No empezado</option>
+            <option value="sin-empezar">Sin empezar</option>
             <option value="en-proceso">En proceso</option>
             <option value="terminado">Terminado</option>
         </select>
@@ -60,9 +60,9 @@
     public void statusStyleSelect ()
     {
         if (Status == "En proceso") statusStyle = "en-proceso";
-        if (Status == "No empezado") statusStyle = "no-empezado";
+        if (Status == "Sin empezar") statusStyle = "sin-empezar";
         if (Status == "Terminado") statusStyle = "terminado";
-        if (string.IsNullOrEmpty(Status)) statusStyle = "no-empezado";
+        if (string.IsNullOrEmpty(Status)) statusStyle = "sin-empezar";
     }
 
     private async Task EliminarLibro()

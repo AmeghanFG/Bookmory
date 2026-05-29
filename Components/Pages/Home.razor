@@ -2,8 +2,6 @@
 @using Bookmory.Data
 @using Bookmory.Repositorios
 @rendermode InteractiveServer
-@using Bookmory.Data
-@using Bookmory.Repositorios
 @inject IRepositorioUsuarios repositorioUsuarios
 
 
@@ -106,7 +104,7 @@
                                 <td>
                                     <span class="estadoLibro">
                                         <span>&#9679;</span>
-                                        @item.Estado
+                                        @item.Estado?.TipoEstado
                                     </span>
                                 </td>
                             </tr>
@@ -175,9 +173,9 @@
         misLibros = await repositorioUsuarios.ObtenerLibrosPorUsuario(usuarioId);
 
         total = misLibros.Count;
-        terminados = misLibros.Count(x => x.Estado == "Terminado");
-        enProceso = misLibros.Count(x => x.Estado == "En proceso");
-        sinEmpezar = misLibros.Count(x => x.Estado == "Sin Empezar");
+        terminados = misLibros.Count(x => x.EstadoId == 3);
+        enProceso = misLibros.Count(x => x.EstadoId == 2);
+        sinEmpezar = misLibros.Count(x => x.EstadoId == 1);
 
         if (total > 0)
         {
