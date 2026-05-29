@@ -29,7 +29,7 @@
         <aside class="bg-light p-3 mb-1">
             <section  class="px-2 py-1 d-flex flex-row gap-3 align-items-left">
                 <h4>Género</h4>
-                <select class="form-select w-25" @bind="_generoSeleccionado" aria-label="Seleccionar género">
+                <select class="form-select w-25" value="@_generoSeleccionado" @onchange="FiltrarLibros" aria-label="Seleccionar género">
                     <option value="">Todos</option>
                     @foreach(var genero in generos)
                     {
@@ -87,6 +87,7 @@
     protected override async Task OnInitializedAsync()
     {
         LibrosBusqueda = await repositorioLibros.ObtenerLibros();
+
         libros = LibrosBusqueda;
         generos = await repositorioGeneros.ObtenerGeneros();
     }
@@ -104,6 +105,27 @@
             if (busq.Count > 0)
             {
                 libros = busq;
+            }
+            else
+            {
+                libros = LibrosBusqueda;
+            }
+        }
+    }
+    private async Task FiltrarLibros(ChangeEventArgs e)
+    {
+        if (String.IsNullOrWhiteSpace(e.Value.ToString()) || e.Value.ToString() == "Todos")
+        {
+            libros = LibrosBusqueda;
+        }
+        else
+        {
+            var filtrado = libros = await repositorioGeneros.ObtenerLibrosPorGeneros(int.Parse(e.Value.ToString()));
+            filtrado = filtrado.ToList();
+
+            if (filtrado.Count > 0)
+            {
+                libros = filtrado;
             }
             else
             {
