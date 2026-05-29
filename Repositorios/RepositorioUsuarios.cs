@@ -45,5 +45,16 @@ namespace Bookmory.Repositorios
         {
             return await _context.UsuarioLibros.AnyAsync(u => u.UsuarioId == usuarioId && u.LibroId == libroId);
         }
+        public async Task<UsuarioLibro> ObtenerUsuarioLibro(int id)
+        {
+            return await _context.UsuarioLibros.Include(ul => ul.Libro).Include(ul => ul.Estado).FirstOrDefaultAsync(ul => ul.Id == id);
+        }
+
+        public async Task ActualizarEstado(int ulid, int estadoid)
+        {
+            var ul = await ObtenerUsuarioLibro(ulid);
+            ul.EstadoId = estadoid;
+            await _context.SaveChangesAsync();
+        }
     }
 }

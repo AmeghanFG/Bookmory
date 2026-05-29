@@ -85,6 +85,20 @@
 
                         @foreach (var item in misLibros)
                         {
+                            switch (item.Estado?.Id)
+                            {
+                                case 1:
+                                    statusStyle = "sin-empezar";
+                                    break;
+                                case 2:
+                                    statusStyle = "en-proceso";
+                                    break;
+                                case 3:
+                                    statusStyle = "terminado";
+                                    break;
+
+                             }
+
                             <tr>
 
                                 <td>
@@ -102,9 +116,9 @@
                                 </td>
 
                                 <td>
-                                    <span class="estadoLibro">
+                                    <span class="@statusStyle">
                                         <span>&#9679;</span>
-                                        @item.Estado?.TipoEstado
+                                        @item.Estado.TipoEstado
                                     </span>
                                 </td>
                             </tr>
@@ -158,6 +172,8 @@
 </div>
 @code {
     List<UsuarioLibro> misLibros = new();
+    
+    string statusStyle = "";
 
     int total;
     int terminados;
