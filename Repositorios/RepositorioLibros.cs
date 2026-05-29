@@ -17,5 +17,12 @@ namespace Bookmory.Repositorios
         {
             return await _context.Libros.Include(l => l.Autor).Include(l=> l.Editorial).AsNoTracking().ToListAsync();
         }
+
+        // hay q mandar el obteto, no id
+        public async Task AgregarLibroUsuario(UsuarioLibro usuarioLibro)
+        {
+            _context.UsuarioLibros.Add(usuarioLibro);
+            await _context.SaveChangesAsync();
+        }
     }
 }

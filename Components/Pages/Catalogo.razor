@@ -5,6 +5,7 @@
 @using Bookmory.Repositorios
 @inject IRepositorioLibros repositorioLibros
 @inject IRepositorioGeneros repositorioGeneros
+@inject IRepositorioUsuarios repositorioUsuarios
 
 <div class="container-fluid p-0 m-0">
     <!--- Parte principal -->
@@ -49,7 +50,8 @@
                           Author="@($"{libro.Autor?.Nombre} {libro.Autor?.ApellidoPaterno}")"
                           Description="@libro.Descripcion"
                           ImageUrl="@libro.ImagenUrl"
-                          Libro="@libro">
+                          LibroId="@libro.Id">
+                          @* Libro="@libro"> *@
                     </BookCard>
             }
 
@@ -74,6 +76,8 @@
     private string _generoSeleccionado = string.Empty;
     private List<Libro> libros = new();
     private List<Genero> generos = new();
+
+    // agregar y validación estpa en la bookcard
 
     protected override async Task OnInitializedAsync()
     {

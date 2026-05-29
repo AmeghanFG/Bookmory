@@ -9,11 +9,22 @@
         <h5 class="card-title">@Title</h5>
         <p class="card-text">@Author</p>
         <p class="card-text">@Description</p>
-        <a href="mis_libros" class="btn btn-primary" @onclick="Agregar">Agregar</a>
+        @* <a href="mis_libros" class="btn btn-primary" @onclick="Agregar">Agregar</a> *@
+        <button class="btn btn-primary mt-2" @onclick="Agregar">Agregar</button>
+
+        @if (!string.IsNullOrEmpty(mensaje))
+        {
+            <div class="mt-2 alert @(libroEnLista ? "alert-danger" : "alert-success")">
+                @mensaje
+            </div>
+        }
     </div>
 </div>
 
 @code {
+    [Parameter]
+    public int LibroId { get; set; }
+
     [Parameter]
     public string Title { get; set; }
 
@@ -25,15 +36,59 @@
 
     [Parameter]
     public string ImageUrl { get; set; }
-    [Parameter]
-    public Libro Libro { get; set; }
-    private UsuarioLibro _usuarioLibro = new();
 
-    private async void Agregar(){
-        _usuarioLibro.Libro = Libro;
-        _usuarioLibro.Estado = "Por empezar";
-        _usuarioLibro.Usuario.Id = 2;
+    // para validar
+    private string mensaje = "";
+    private bool libroEnLista = false;
 
-        await repositorioUsuarios.AgregarLibrosPorUsuario(_usuarioLibro);
+    // id de usuario
+    private int usuarioId = 2;
+
+    // [Parameter]
+    // public Libro Libro { get; set; }
+    // private UsuarioLibro _usuarioLibro = new();
+
+    // private async void Agregar(){
+
+    //     int usuarioId = 2;
+    //     _usuarioLibro.Libro = Libro;
+    //     _usuarioLibro.Estado = "Por empezar";
+    //     _usuarioLibro.UsuarioId = usuarioId;
+
+    //     await repositorioUsuarios.AgregarLibrosPorUsuario(_usuarioLibro);
+    // }
+
+    // [Parameter]
+    // public EventCallback<int> ParaAgregarLibro { get; set; }
+
+    // private async Task AgregarLibroPorUsuario()
+    // {
+    //     se supone que el id del libro se asigna desde el componente padre, entonces se pasa como argumento en el callback
+    //     await ParaAgregarLibro.InvokeAsync(LibroId);
+    // }
+
+    private async Task Agregar()
+    {
+        bool existe = await repositorioUsuarios.ExisteLibroUsuario(usuarioId, LibroId);
+
+        if (existe)
+        {
+            mensaje = "Este libro ya está agregado";
+            libroEnLista = true;
+
+            return;
+        }
+
+        UsuarioLibro usuarioLibro = new UsuarioLibro
+        {
+            UsuarioId = usuarioId,
+            LibroId = LibroId,
+            Estado = "Sin empezar"
+        };
+
+        await repositorioUsuarios.AgregarLibroPorUsuario(usuarioLibro);
+
+        mensaje = "Libro agregado correctamente";
+        libroEnLista = false;
     }
 }

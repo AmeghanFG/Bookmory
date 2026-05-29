@@ -23,10 +23,21 @@ namespace Bookmory.Repositorios
                 .AsNoTracking()
                 .ToListAsync();
         }
-        public async Task AgregarLibrosPorUsuario(UsuarioLibro usuario)
+        //public async Task AgregarLibrosPorUsuario(UsuarioLibro usuario)
+        //{
+        //    await _context.AddAsync(usuario);
+        //    await _context.SaveChangesAsync();
+        //}
+
+        public async Task AgregarLibroPorUsuario(UsuarioLibro usuarioLibro)
         {
-            await _context.AddAsync(usuario);
+            _context.UsuarioLibros.Add(usuarioLibro);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> ExisteLibroUsuario(int usuarioId, int libroId)
+        {
+            return await _context.UsuarioLibros.AnyAsync(x => x.UsuarioId == usuarioId && x.LibroId == libroId);
         }
     }
 }

@@ -12,7 +12,6 @@
         public int LibroId { get; set; }
         public virtual Libro? Libro { get; set; }
 
-        // Opcional
-        public string Estado { get; set; } = string.Empty;
+        public string Estado { get; set; } = "Sin empezar"; // antes string empty, hay q editarlo por el id del estado
     }
 }
