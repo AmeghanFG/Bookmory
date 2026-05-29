@@ -15,7 +15,7 @@ namespace Bookmory.Repositorios
 
         public async Task<Autor?> ObtenerAutorPorId(int id)
         {
-            return await _context.Autores.AsNoTracking().FirstOrDefaultAsync(r => r.Id == id);
+            return await _context.Autores.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<List<Autor>> ObtenerAutores()

@@ -1,5 +1,7 @@
 ﻿@rendermode InteractiveServer
-
+@using Bookmory.Data
+@using Bookmory.Repositorios
+@inject IRepositorioUsuarios repositorioUsuarios
 
 <!-- Tarjeta ejemplo-->
 <div class="card shadow-sm mis-libros-card"
@@ -27,16 +29,17 @@
             <option value="en-proceso">En proceso</option>
             <option value="terminado">Terminado</option>
         </select>
-        @* <button class="btn btn-sm btn-outline-danger" @onclick="Eliminar">🗑️</button> *@
+        <button class="btn btn-sm btn-outline-danger" @onclick="EliminarLibro">🗑️</button>
     </div>
 </div>
 
 @code {
+
     [Parameter]
     public string Title { get; set; }
 
-    // [Parameter]
-    // public int Id { get; set; }
+    [Parameter]
+    public int Id { get; set; }
 
     [Parameter]
     public string Author { get; set; }
@@ -46,6 +49,10 @@
 
     [Parameter]
     public string Status { get; set; }
+
+    // volver a cargar la pag para mostrar la lista nueva después de eliminar
+    [Parameter]
+    public EventCallback OnEliminar { get; set; }
 
     string statusStyle = "";
 
@@ -67,6 +74,7 @@
 
     private async Task EliminarLibro()
     {
-        // await OnEliminar.InvokeAsync();
+        await repositorioUsuarios.EliminarLibroPorUsuario(Id);
+        await OnEliminar.InvokeAsync();
     }
 }

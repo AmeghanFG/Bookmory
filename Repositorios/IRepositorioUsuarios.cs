@@ -6,6 +6,7 @@ namespace Bookmory.Repositorios
     {
         Task<List<UsuarioLibro>> ObtenerLibrosPorUsuario(int usuarioId);
         Task AgregarLibroPorUsuario(UsuarioLibro usuarioLibro);
+        Task EliminarLibroPorUsuario(int libroId);
         Task<bool> ExisteLibroUsuario(int usuarioId, int libroId);
     }
 }

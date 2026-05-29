@@ -36,9 +36,14 @@ namespace Bookmory.Repositorios
             await _context.SaveChangesAsync();
         }
 
+        public async Task EliminarLibroPorUsuario(int id)
+        {
+            await _context.UsuarioLibros.Where(l => l.Id == id).ExecuteDeleteAsync();
+        }
+
         public async Task<bool> ExisteLibroUsuario(int usuarioId, int libroId)
         {
-            return await _context.UsuarioLibros.AnyAsync(x => x.UsuarioId == usuarioId && x.LibroId == libroId);
+            return await _context.UsuarioLibros.AnyAsync(u => u.UsuarioId == usuarioId && u.LibroId == libroId);
         }
     }
 }

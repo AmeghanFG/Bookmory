@@ -34,9 +34,11 @@
                 @foreach (var item in misLibros)
                 {
                     <MisLibrosCard Title="@item.Libro?.Titulo"
-                                   Author="@($"{item.Libro?.Autor?.Nombre} {item.Libro?.Autor?.ApellidoPaterno}")"
-                                   ImageUrl="@item.Libro?.ImagenUrl"
-                                   Status="@item.Estado?.TipoEstado">
+                         Author="@($"{item.Libro?.Autor?.Nombre} {item.Libro?.Autor?.ApellidoPaterno}")"
+                         ImageUrl="@item.Libro?.ImagenUrl"
+                         Status="@item.Estado?.TipoEstado"
+                         Id="@item.Id"
+                        OnEliminar="RecargarLibros">
                     </MisLibrosCard>
                 }
             }
@@ -45,12 +47,19 @@
 </div>
 
 @code {
+
     List<UsuarioLibro> misLibros = new();
 
     protected override async Task OnInitializedAsync()
     {
+        await RecargarLibros();
+    }
+
+    private async Task RecargarLibros()
+    {
         int usuarioId = 2;
 
-        misLibros = await repositorioUsuarios.ObtenerLibrosPorUsuario(usuarioId);
+        misLibros = await repositorioUsuarios
+            .ObtenerLibrosPorUsuario(usuarioId);
     }
 }

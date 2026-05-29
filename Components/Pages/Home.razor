@@ -167,11 +167,17 @@
     int pProceso;
     int pSinEmpezar;
 
+    // id usuario
+    int usuarioId = 2;
+
     protected override async Task OnInitializedAsync()
     {
-        int usuarioId = 2;
-        misLibros = await repositorioUsuarios.ObtenerLibrosPorUsuario(usuarioId);
+        await RecargarLibros();
+    }
 
+    private async Task RecargarLibros()
+    {
+        misLibros = await repositorioUsuarios.ObtenerLibrosPorUsuario(usuarioId);
         total = misLibros.Count;
         terminados = misLibros.Count(x => x.EstadoId == 3);
         enProceso = misLibros.Count(x => x.EstadoId == 2);
